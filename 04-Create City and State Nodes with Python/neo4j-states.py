@@ -17,6 +17,6 @@ with open('{0}\\states.json'.format(script_dir), mode='r') as states:
 for state in state_list:
     print(state['name'])
     print(state['abbreviation'])
-    query = 'MERGE (n:state {{ name: "{0}", abbreviation: "{1}" }})'.format(state['name'], state['abbreviation'])
+    query = 'MERGE (s:state {{ name: "{0}", abbreviation: "{1}" }})'.format(state['name'], state['abbreviation'])
     print(query)
     sess.run(query)

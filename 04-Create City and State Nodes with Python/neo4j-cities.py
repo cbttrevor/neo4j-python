@@ -1,8 +1,15 @@
+'''
+This Python script will create nodes in Neo4j that represent cities with more than 100,000 population, from cities.json.
+
+The cities.json file must exist in the same directory as this Python script.
+'''
+
 from neo4j import GraphDatabase
 import json
 import os
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
+print(script_dir)
 n4j = GraphDatabase.bolt_driver('localhost', auth=('neo4j', 'test'))
 session = n4j.session()
 
@@ -16,9 +23,3 @@ for city in city_list:
     print(city)
     query = 'MERGE (n:city {{ name: "{0}" }})'.format(city['city'])
     session.run(query)
-
-# # Create all the nodes for each U.S. State
-# for state in set(map(lambda city: city['state'], city_list)):
-#     query = 'MERGE (n:state {{ name: "{0}" }})'.format(state)
-#     session.run(query)   
-#     print(state)
